@@ -1,0 +1,25 @@
+POST http://localhost:6969/admin/new
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+################################
+
+POST http://localhost:6969/inject/new
+Content-Type: application/json
+{
+    "name":"khac hiep",
+    "inject":"mui 2",
+    "birthday":"22/08/2000",
+    "sex":"nam",
+    "phone":"0393401038",
+    "email":"hiep@gmail.com",
+    "adress":"24 230/21/32 me tri",
+    "city":"ha noi",
+    "date_inject":"15/12/2021",
+    "shift":"sang"
+}
+################################
+GET http://localhost:6969/admin

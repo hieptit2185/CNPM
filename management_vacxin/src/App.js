@@ -8,8 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import RegisterInject from "./components/RegisterInject";
 import Register from "./components/Register";
-import RouteAdmin from "./admin/RouteAdmin.js";
 import axios from "axios";
+import Home from "./admin/Home";
 import { useNavigate } from "react-router-dom";
 
 const routers = [
@@ -63,7 +63,11 @@ function App() {
                 path={route.path}
                 exact
                 element={
-                  <route.component onRegister={onRegister} patient={patient} />
+                  <route.component
+                    onRegister={onRegister}
+                    patient={patient}
+                    setPatient={setPatient}
+                  />
                 }
                 key={index}
               />
@@ -71,7 +75,6 @@ function App() {
           })}
         </Routes>
       </div>
-      <RouteAdmin />
       <Footer />
     </div>
   );

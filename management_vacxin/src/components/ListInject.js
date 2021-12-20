@@ -36,7 +36,7 @@ function ListInject() {
                   <td>{inject.name}</td>
                   <td>{moment(inject.birthday).format("DD/MM/YYYY")}</td>
                   <td>{inject.sex}</td>
-                  <td>{`0${inject.phone}`}</td>
+                  <td>{`0${String(inject.phone).slice(1, 3)}*******`}</td>
                   <td>{inject.city}</td>
                   <td>{inject.inject}</td>
                   <td>{moment(inject.date_inject).format("DD/MM/YYYY")}</td>

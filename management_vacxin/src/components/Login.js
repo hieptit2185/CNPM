@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import "../asets/css/login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  const { onRegister } = props;
+  const anyName = useNavigate();
+  const { onRegister, setPatient } = props;
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    onRegister(user, pass);
+    if (user === "admin" && pass === "admin") {
+      setPatient("admin");
+    } else {
+      onRegister(user, pass);
+    }
     setUser("");
     setPass("");
   };

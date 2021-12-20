@@ -72,7 +72,9 @@ function Header(props) {
             }}
           >
             Xin chào {props.patient}
-            <Button onClick={handleOut}>Đăng xuất</Button>
+            <Button className="mx-2" onClick={handleOut}>
+              Đăng xuất
+            </Button>
           </h6>
         )}
       </ul>

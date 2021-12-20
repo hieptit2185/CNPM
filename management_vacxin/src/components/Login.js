@@ -11,6 +11,7 @@ function Login(props) {
     e.preventDefault();
     if (user === "admin" && pass === "admin") {
       setPatient("admin");
+      anyName("/admin");
     } else {
       onRegister(user, pass);
     }

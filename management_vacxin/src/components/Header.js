@@ -12,72 +12,129 @@ function Header(props) {
   };
   return (
     <div>
-      <ul className="nav justify-content-center p-4 navbar-dark bg-dark position-relative ">
-        <li className="nav-item ">
-          <Link
-            className="nav-link active text-white font-weight-bold"
-            aria-current="page"
-            to="/"
+      {props.patient === "admin" ? (
+        <ul className="nav justify-content-center p-4 navbar-dark bg-dark position-relative ">
+          <li className="nav-item ">
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/admin"
+            >
+              Home
+            </Link>
+          </li>
+          <li
+            className="nav-item "
+            style={{ pointerEvents: props.patient ? "auto" : "none" }}
           >
-            Trang chủ
-          </Link>
-        </li>
-        <li
-          className="nav-item "
-          style={{ pointerEvents: props.patient ? "auto" : "none" }}
-        >
-          <Link
-            className="nav-link active text-white font-weight-bold"
-            aria-current="page"
-            to="/danhsachtiem"
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/admin/inject"
+            >
+              Inject
+            </Link>
+          </li>
+          <li
+            className="nav-item text-white font-weight-bold"
+            style={{ pointerEvents: props.patient ? "auto" : "none" }}
           >
-            Danh sách người tiêm
-          </Link>
-        </li>
-        <li
-          className="nav-item text-white font-weight-bold"
-          style={{ pointerEvents: props.patient ? "auto" : "none" }}
-        >
-          <Link
-            className="nav-link active text-white font-weight-bold"
-            aria-current="page"
-            to="/register_inject"
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/admin/vaccine"
+            >
+              Vaccine
+            </Link>
+          </li>
+          {props.patient !== "" && (
+            <h6
+              style={{
+                color: "red",
+                right: "20px",
+                position: "absolute",
+                top: "33px",
+              }}
+            >
+              Xin chào {props.patient}
+              <Button className="mx-2" onClick={handleOut}>
+                Đăng xuất
+              </Button>
+            </h6>
+          )}
+        </ul>
+      ) : (
+        <ul className="nav justify-content-center p-4 navbar-dark bg-dark position-relative ">
+          <li className="nav-item ">
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/"
+            >
+              Trang chủ
+            </Link>
+          </li>
+          <li
+            className="nav-item "
+            style={{ pointerEvents: props.patient ? "auto" : "none" }}
           >
-            Đăng ký tiêm
-          </Link>
-        </li>
-        <li
-          className="nav-item text-white font-weight-bold "
-          style={{ pointerEvents: props.patient ? "none" : "auto" }}
-        >
-          <Link className="nav-link active" aria-current="page" to="/login">
-            Đăng nhập
-          </Link>
-        </li>
-        <li
-          className="nav-item text-white font-weight-bold"
-          style={{ pointerEvents: props.patient ? "none" : "auto" }}
-        >
-          <Link className="nav-link active" aria-current="page" to="/register">
-            Đăng ký
-          </Link>
-        </li>
-        {props.patient !== "" && (
-          <h6
-            style={{
-              color: "red",
-              right: "20px",
-              position: "absolute",
-              top: "33px",
-            }}
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/danhsachtiem"
+            >
+              Danh sách người tiêm
+            </Link>
+          </li>
+          <li
+            className="nav-item text-white font-weight-bold"
+            style={{ pointerEvents: props.patient ? "auto" : "none" }}
           >
-            Xin chào {props.patient}
-            <Button className="mx-2" onClick={handleOut}>
-              Đăng xuất
-            </Button>
-          </h6>
-        )}
-      </ul>
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/register_inject"
+            >
+              Đăng ký tiêm
+            </Link>
+          </li>
+          <li
+            className="nav-item text-white font-weight-bold "
+            style={{ pointerEvents: props.patient ? "none" : "auto" }}
+          >
+            <Link className="nav-link active" aria-current="page" to="/login">
+              Đăng nhập
+            </Link>
+          </li>
+          <li
+            className="nav-item text-white font-weight-bold"
+            style={{ pointerEvents: props.patient ? "none" : "auto" }}
+          >
+            <Link
+              className="nav-link active"
+              aria-current="page"
+              to="/register"
+            >
+              Đăng ký
+            </Link>
+          </li>
+          {props.patient !== "" && (
+            <h6
+              style={{
+                color: "red",
+                right: "20px",
+                position: "absolute",
+                top: "33px",
+              }}
+            >
+              Xin chào {props.patient}
+              <Button className="mx-2" onClick={handleOut}>
+                Đăng xuất
+              </Button>
+            </h6>
+          )}
+        </ul>
+      )}
     </div>
   );
 }

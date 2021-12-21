@@ -42,6 +42,10 @@ const List_injectSchema = new Schema({
     type: String,
     required: true,
   },
+  vaccine: {
+    type: String,
+    required: true,
+  },
 });
 
 const List_inject = mongoose.model("List_inject", List_injectSchema);

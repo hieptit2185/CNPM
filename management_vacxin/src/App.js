@@ -68,9 +68,9 @@ function App() {
     }
   };
   return (
-    <div className="App container">
+    <div className="App">
       <Header patient={patient} setPatient={setPatient} />
-      <div className="contenets" style={{ minHeight: "75vh" }}>
+      <div className="contents" style={{ minHeight: "75vh" }}>
         <Routes>
           {routers.map((route, index) => {
             return (

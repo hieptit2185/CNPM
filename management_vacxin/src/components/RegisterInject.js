@@ -6,6 +6,8 @@ import axios from "axios";
 
 function RegisterInject() {
   const [startDate, setStartDate] = useState("");
+  const [vaccine, setVaccine] = useState([]);
+  const [nameVaccine, setNameVaccine] = useState("");
   const [sex, setSex] = useState("");
   const [city, setCity] = useState("");
   const [citys, setCitys] = useState([]);
@@ -22,6 +24,9 @@ function RegisterInject() {
     axios.get("https://provinces.open-api.vn/api/").then((res) => {
       setCitys(res.data);
     });
+    axios.get(`${api}/vaccine`).then((res) => {
+      setVaccine(res.data);
+    });
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +40,8 @@ function RegisterInject() {
       adress &&
       city &&
       dateInject &&
-      shift
+      shift &&
+      nameVaccine
     ) {
       await axios.post(`${api}/inject/new`, {
         name,
@@ -48,6 +54,7 @@ function RegisterInject() {
         date_inject: dateInject,
         shift,
         inject,
+        vaccine: nameVaccine,
       });
       alert("Đăng ký thành công!");
     }
@@ -61,7 +68,8 @@ function RegisterInject() {
       city,
       dateInject,
       shift,
-      inject)
+      inject,
+      nameVaccine)
     ) {
       alert(" Vui lòng nhập đủ thông tin");
     }
@@ -75,6 +83,8 @@ function RegisterInject() {
     setDateInject("");
     setShift("");
     setInject("");
+    setNameVaccine("");
+    setCheck(false);
   };
 
   return (
@@ -97,8 +107,8 @@ function RegisterInject() {
               onChange={(e) => setInject(e.target.value)}
             >
               <option disabled></option>
-              <option value="Mũi 1">Mũi tiêm thứ nhất</option>
-              <option value="Mũi 2">Mũi tiêm thứ hai</option>
+              <option value="1">Mũi tiêm thứ nhất</option>
+              <option value="2">Mũi tiêm thứ hai</option>
             </select>
           </div>
         </div>
@@ -248,11 +258,31 @@ function RegisterInject() {
               onChange={(e) => setShift(e.target.value)}
             >
               <option disabled></option>
-              <option value="Buổi sáng">Buổi sáng</option>
-              <option value="Buổi chiều">Buổi chiều</option>
-              <option value="Cả ngày">Cả ngày</option>
+              <option value="Sáng">Buổi sáng</option>
+              <option value="Chiều">Buổi chiều</option>
+              <option value="Full">Cả ngày</option>
             </select>
           </div>
+        </div>
+        <div className="col-md-3">
+          <label htmlFor="validationCustom04" className="form-label">
+            Loại Vaccine mong muốn
+          </label>
+          <select
+            className="form-select"
+            id="validationCustom04"
+            required
+            value={nameVaccine}
+            onChange={(e) => setNameVaccine(e.target.value)}
+          >
+            <option disabled></option>
+            {vaccine.length > 0 &&
+              vaccine.map((item, index) => (
+                <option key={index} value={item.nameVaccine}>
+                  {item.nameVaccine}
+                </option>
+              ))}
+          </select>
         </div>
         <div className="col-12">
           <div className="form-check">

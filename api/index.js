@@ -101,6 +101,7 @@ app.post("/inject/new", (req, res) => {
     city: req.body.city,
     date_inject: req.body.date_inject,
     shift: req.body.shift,
+    vaccine: req.body.vaccine,
   });
   list_inject.save();
 
@@ -109,5 +110,51 @@ app.post("/inject/new", (req, res) => {
 
 app.get("/inject", async (req, res) => {
   const data = await List_inject.find();
+  res.json(data);
+});
+
+app.delete("/inject/delete/:_id", async (req, res) => {
+  const result = await List_inject.findByIdAndDelete(req.params._id);
+  res.json(result);
+});
+
+app.put("/inject/update/:id", async (req, res) => {
+  const result = await List_inject.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+    inject: req.body.inject,
+    birthday: req.body.birthday,
+    sex: req.body.sex,
+    phone: req.body.phone,
+    email: req.body.email,
+    adress: req.body.adress,
+    city: req.body.city,
+    date_inject: req.body.date_inject,
+    shift: req.body.shift,
+    vaccine: req.body.vaccine,
+  });
+  res.json(result);
+});
+
+app.get("/inject/:id", async (req, res) => {
+  const result = await List_inject.findById(req.params.id);
+  res.json(result);
+});
+
+//Vaccine covid
+
+const Vaccine = require("./models/Vaccine");
+
+app.post("/vaccine/new", (req, res) => {
+  const vaccine = new Vaccine({
+    nameVaccine: req.body.nameVaccine,
+    quantily: req.body.quantily,
+  });
+  vaccine.save();
+
+  res.json(vaccine);
+});
+
+app.get("/vaccine", async (req, res) => {
+  const data = await Vaccine.find();
   res.json(data);
 });

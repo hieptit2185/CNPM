@@ -13,7 +13,7 @@ const UserSchema = new Schema({
   },
   create_at: {
     type: String,
-    default: moment().format("DD/MM/YYYY hh:mm"),
+    default: moment().format("DD/MM/YYYY"),
   },
 });
 

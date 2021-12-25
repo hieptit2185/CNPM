@@ -71,6 +71,21 @@ app.post("/user/new", (req, res) => {
   res.json(user);
 });
 
+app.delete("/user/delete/:_id", async (req, res) => {
+  const result = await User.findByIdAndDelete(req.params._id);
+  res.json(result);
+});
+
+app.get("/user", async (req, res) => {
+  const data = await User.find();
+  res.json(data);
+});
+
+app.get("/user/:id", async (req, res) => {
+  const result = await User.findById(req.params.id);
+  res.json(result);
+});
+
 app.post("/user/login", async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -85,6 +100,13 @@ app.post("/user/login", async (req, res) => {
   } catch (error) {
     res.status(500).send("Server error");
   }
+});
+
+app.put("/user/update/:id", async (req, res) => {
+  const result = await User.findByIdAndUpdate(req.params.id, {
+    password: req.body.password,
+  });
+  res.json(result);
 });
 
 // User_inject
@@ -122,7 +144,6 @@ app.put("/inject/update/:id", async (req, res) => {
   const result = await List_inject.findByIdAndUpdate(req.params.id, {
     name: req.body.name,
     inject: req.body.inject,
-    birthday: req.body.birthday,
     sex: req.body.sex,
     phone: req.body.phone,
     email: req.body.email,
@@ -157,4 +178,9 @@ app.post("/vaccine/new", (req, res) => {
 app.get("/vaccine", async (req, res) => {
   const data = await Vaccine.find();
   res.json(data);
+});
+
+app.delete("/vaccine/delete/:_id", async (req, res) => {
+  const result = await Vaccine.findByIdAndDelete(req.params._id);
+  res.json(result);
 });

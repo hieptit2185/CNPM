@@ -4,3 +4,7 @@
 .Update_inject{
     width:100%
 }
+
+.filter .form-select{
+    width: 15%!important;
+}

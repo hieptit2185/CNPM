@@ -47,6 +47,18 @@ function Header(props) {
               Vaccine
             </Link>
           </li>
+          <li
+            className="nav-item text-white font-weight-bold"
+            style={{ pointerEvents: props.patient ? "auto" : "none" }}
+          >
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/admin/doctor"
+            >
+              Doctor
+            </Link>
+          </li>
           {props.patient !== "" && (
             <h6
               style={{

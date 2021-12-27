@@ -9,7 +9,6 @@ import Login from "./components/Login";
 import RegisterInject from "./components/RegisterInject";
 import Register from "./components/Register";
 import axios from "axios";
-import Home from "./admin/Home";
 import Vaccine from "./admin/Vaccine";
 import Inject from "./admin/Inject";
 import Doctor from "./admin/Doctor";
@@ -36,10 +35,6 @@ const routers = [
   {
     path: "/register",
     component: Register,
-  },
-  {
-    path: "/admin",
-    component: Home,
   },
   {
     path: "/admin/vaccine",

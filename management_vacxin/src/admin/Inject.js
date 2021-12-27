@@ -91,7 +91,7 @@ function Inject() {
             <option value="mui2">Mũi 2</option>
           </select>
         </div>
-        <table className="table">
+        <table className="table listItemTable">
           <thead>
             <tr>
               <th scope="col">STT</th>
@@ -106,6 +106,7 @@ function Inject() {
               <th scope="col">Ngày tiêm</th>
               <th scope="col">Buổi tiêm</th>
               <th scope="col">Vaccine</th>
+              <th scope="col">Trạng Thái</th>
               <th scope="col" style={{ textAlign: "center" }}>
                 Action
               </th>

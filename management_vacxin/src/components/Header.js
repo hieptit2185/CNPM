@@ -131,19 +131,14 @@ function Header(props) {
             </Link>
           </li>
           {props.patient !== "" && (
-            <h6
-              style={{
-                color: "red",
-                right: "20px",
-                position: "absolute",
-                top: "33px",
-              }}
-            >
+            <div className="d-flex flex-column" style={{position: "absolute",right: "10px",top:'10px'}}>
+            <h6 style={{color: "red"}}>
               Xin chào {props.patient}
+            </h6>
               <Button className="mx-2" onClick={handleOut}>
                 Đăng xuất
               </Button>
-            </h6>
+            </div> 
           )}
         </ul>
       )}

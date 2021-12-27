@@ -52,7 +52,7 @@ function Inject_item(props) {
     },
     [injects.name]
   );
-  return (
+  return (               
     <>
       <tr key={index}>
         <th scope="row">{index + 1}</th>
@@ -77,6 +77,12 @@ function Inject_item(props) {
         <td>{dateInject}</td>
         <td>{shift}</td>
         <td>{nameVaccine}</td>
+        <td>
+          {new Date(injects.date_inject)<= new Date()?
+           <span className="text-success" style={{fontWeight:'bold'}}>Đã tiêm</span>:
+           <span className="text-danger" style={{fontWeight:'bold'}}>Chưa tiêm</span>
+          }
+        </td>
         <td>
           <Button
             color="primary"

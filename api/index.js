@@ -131,7 +131,7 @@ app.post("/inject/new", (req, res) => {
 });
 
 app.get("/inject", async (req, res) => {
-  const data = await List_inject.find();
+  const data = await List_inject.find(req.query);
   res.json(data);
 });
 

@@ -12,6 +12,8 @@ import axios from "axios";
 import Vaccine from "./admin/Vaccine";
 import Inject from "./admin/Inject";
 import Doctor from "./admin/Doctor";
+import Complete from "./admin/Complete";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -47,6 +49,10 @@ const routers = [
   {
     path: "/admin/doctor",
     component: Doctor,
+  },
+  {
+    path: "/admin/complete",
+    component: Complete,
   },
 ];
 

@@ -14,18 +14,9 @@ function Header(props) {
     <div>
       {props.patient === "admin" ? (
         <ul className="nav justify-content-center p-4 navbar-dark bg-dark position-relative ">
-          <li className="nav-item ">
-            <Link
-              className="nav-link active text-white font-weight-bold"
-              aria-current="page"
-              to="/admin"
-            >
-              Home
-            </Link>
-          </li>
           <li
             className="nav-item "
-            style={{ pointerEvents: props.patient ? "auto" : "none" }}
+            style={{ pointedírEvents: props.patient ? "auto" : "none" }}
           >
             <Link
               className="nav-link active text-white font-weight-bold"
@@ -57,6 +48,15 @@ function Header(props) {
               to="/admin/doctor"
             >
               Doctor
+            </Link>
+          </li>
+          <li className="nav-item ">
+            <Link
+              className="nav-link active text-white font-weight-bold"
+              aria-current="page"
+              to="/admin/complete"
+            >
+              Complete
             </Link>
           </li>
           {props.patient !== "" && (
@@ -112,7 +112,7 @@ function Header(props) {
           </li>
           <li
             className="nav-item text-white font-weight-bold "
-            style={{ pointerEvents: props.patient ? "none" : "auto" }}
+            style={{ display: props.patient ? "none" : "" }}
           >
             <Link className="nav-link active" aria-current="page" to="/login">
               Đăng nhập
@@ -120,7 +120,7 @@ function Header(props) {
           </li>
           <li
             className="nav-item text-white font-weight-bold"
-            style={{ pointerEvents: props.patient ? "none" : "auto" }}
+            style={{ display: props.patient ? "none" : ""  }}
           >
             <Link
               className="nav-link active"
@@ -131,14 +131,19 @@ function Header(props) {
             </Link>
           </li>
           {props.patient !== "" && (
-            <div className="d-flex flex-column" style={{position: "absolute",right: "10px",top:'10px'}}>
-            <h6 style={{color: "red"}}>
+            <h6
+              style={{
+                color: "red",
+                right: "20px",
+                position: "absolute",
+                top: "33px",
+              }}
+            >
               Xin chào {props.patient}
-            </h6>
               <Button className="mx-2" onClick={handleOut}>
                 Đăng xuất
               </Button>
-            </div> 
+            </h6>
           )}
         </ul>
       )}

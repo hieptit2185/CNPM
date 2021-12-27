@@ -108,7 +108,7 @@ function Inject() {
               <th scope="col">Vaccine</th>
               <th scope="col">Trạng Thái</th>
               <th scope="col" style={{ textAlign: "center" }}>
-                Action
+                Trạng thái
               </th>
             </tr>
           </thead>

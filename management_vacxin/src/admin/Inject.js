@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../asets/css/listInject.css";
 import axios from "axios";
 import "./assets/Inject.css";
+import ReactPaginate from "react-paginate";
 import Inject_item from "./Inject_item";
 
 function Inject() {
@@ -9,6 +10,19 @@ function Inject() {
   const api = "http://localhost:6969";
   const [search, setSearch] = useState("");
   const [inject_nb, setInject_nb] = useState("all");
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = listInject.slice(
+    pagesVisited,
+    pagesVisited + usersPerPage
+  );
+  const pageCount = Math.ceil(listInject.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   useEffect(() => {
     axios.get(`${api}/inject`).then((res) => setListInject(res.data));
@@ -70,7 +84,7 @@ function Inject() {
   return (
     <>
       <div className="list_inject">
-        <center className="mb-3">Quản lý người tiêm</center>
+        <center className="mb-3">Danh sách đăng ký tiêm</center>
         <div className="searchs w-50">
           <input
             className="form-control mb-4"
@@ -94,7 +108,6 @@ function Inject() {
         <table className="table listItemTable">
           <thead>
             <tr>
-              <th scope="col">STT</th>
               <th scope="col">Họ và tên</th>
               <th scope="col">Ngày sinh</th>
               <th scope="col">Giới tính</th>
@@ -113,8 +126,8 @@ function Inject() {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(listInject) &&
-              filterInject(inject_nb, listInject)
+            {Array.isArray(displayUsers) &&
+              filterInject(inject_nb, displayUsers)
                 .filter((val) => {
                   if (search === "") {
                     return val;
@@ -136,6 +149,17 @@ function Inject() {
                 })}
           </tbody>
         </table>
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttnss"}
+          previousLinkClassName={"previousBttns"}
+          nextLinkClassName={"nextBttns"}
+          disabledClassName={"paginationDisableds"}
+          activeClassName={"paginationActives"}
+        />
       </div>
     </>
   );

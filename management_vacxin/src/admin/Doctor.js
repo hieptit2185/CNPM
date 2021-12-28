@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Doctor_item from "./Doctor_item";
+import ReactPaginate from "react-paginate";
 
 function Doctor() {
   const api = "http://localhost:6969";
   const [doctor, setDoctor] = useState([]);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = doctor.slice(pagesVisited, pagesVisited + usersPerPage);
+  const pageCount = Math.ceil(doctor.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   useEffect(() => {
     axios.get(`${api}/user`).then((res) => setDoctor(res.data));
@@ -95,7 +107,7 @@ function Doctor() {
               </thead>
               <tbody>
                 {doctor.length > 0 &&
-                  doctor.map((item, index) => {
+                  displayUsers.map((item, index) => {
                     return (
                       <Doctor_item
                         index={index}
@@ -107,6 +119,17 @@ function Doctor() {
                   })}
               </tbody>
             </table>
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBttnss"}
+              previousLinkClassName={"previousBttns"}
+              nextLinkClassName={"nextBttns"}
+              disabledClassName={"paginationDisableds"}
+              activeClassName={"paginationActives"}
+            />
           </div>
         </div>
       </div>

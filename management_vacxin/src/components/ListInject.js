@@ -2,9 +2,23 @@ import React, { useState, useEffect } from "react";
 import "../asets/css/listInject.css";
 import axios from "axios";
 import moment from "moment";
+import ReactPaginate from "react-paginate";
 
 function ListInject() {
   const [listInject, setListInject] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = listInject.slice(
+    pagesVisited,
+    pagesVisited + usersPerPage
+  );
+  const pageCount = Math.ceil(listInject.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
   useEffect(() => {
     axios
       .get("http://localhost:6969/inject")
@@ -12,11 +26,10 @@ function ListInject() {
   }, []);
   return (
     <div className="list_inject">
-      <center className="mb-3">Danh sách người tiêm</center>
+      <center className="mb-3">Danh sách đăng ký tiêm</center>
       <table className="table">
         <thead>
           <tr>
-            <th scope="col">STT</th>
             <th scope="col">Họ và tên</th>
             <th scope="col">Ngày sinh</th>
             <th scope="col">Giới tính</th>
@@ -29,10 +42,9 @@ function ListInject() {
         </thead>
         <tbody>
           {Array.isArray(listInject) &&
-            listInject.map((inject, index) => {
+            displayUsers.map((inject, index) => {
               return (
                 <tr key={index}>
-                  <th scope="row">{index + 1}</th>
                   <td>{inject.name}</td>
                   <td>{moment(inject.birthday).format("DD/MM/YYYY")}</td>
                   <td>{inject.sex}</td>
@@ -46,6 +58,17 @@ function ListInject() {
             })}
         </tbody>
       </table>
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
     </div>
   );
 }

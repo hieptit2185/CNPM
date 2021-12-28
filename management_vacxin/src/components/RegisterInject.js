@@ -242,7 +242,7 @@ function RegisterInject() {
             className="form-control"
             selected={dateInject}
             onChange={(date) => setDateInject(date)}
-            minDate={new Date()}
+            // minDate={new Date()}
           />
           <div className="valid-feedback">Looks good!</div>
         </div>

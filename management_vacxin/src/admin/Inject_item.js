@@ -31,6 +31,7 @@ function Inject_item(props) {
     email,
     adress,
   };
+  console.log(new Date(injects.date_inject) < new Date());
   const onRemove = () => {
     _handleDelete(injects._id);
   };
@@ -52,10 +53,9 @@ function Inject_item(props) {
     },
     [injects.name]
   );
-  return (               
+  return (
     <>
       <tr key={index}>
-        <th scope="row">{index + 1}</th>
         <td>
           <input
             type="text"
@@ -78,12 +78,17 @@ function Inject_item(props) {
         <td>{shift}</td>
         <td>{nameVaccine}</td>
         <td>
-          {new Date(injects.date_inject)<= new Date()?
-           <span className="text-success" style={{fontWeight:'bold'}}>Đã tiêm</span>:
-           <span className="text-danger" style={{fontWeight:'bold'}}>Chưa tiêm</span>
-          }
+          {new Date(injects.date_inject) <= new Date() ? (
+            <span className="text-success" style={{ fontWeight: "bold" }}>
+              Đã tiêm
+            </span>
+          ) : (
+            <span className="text-danger" style={{ fontWeight: "bold" }}>
+              Chưa tiêm
+            </span>
+          )}
         </td>
-        <td>
+        <td className="d-flex">
           <Button
             color="primary"
             className="mx-2"
